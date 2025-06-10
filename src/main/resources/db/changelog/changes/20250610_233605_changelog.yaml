@@ -1,0 +1,58 @@
+databaseChangeLog:
+- changeSet:
+    id: 1749573386632-1
+    author: quanvo (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: smtp_configsPK
+            name: id
+            type: UUID
+        - column:
+            name: created_at
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            name: updated_at
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            name: from_email
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: host
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: password
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: port
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: use_ssl
+            type: BOOLEAN
+        - column:
+            constraints:
+              nullable: false
+            name: use_tls
+            type: BOOLEAN
+        - column:
+            constraints:
+              nullable: false
+            name: username
+            type: VARCHAR(255)
+        tableName: smtp_configs
+    rollback:
+    - dropTable:
+        tableName: smtp_configs
+
