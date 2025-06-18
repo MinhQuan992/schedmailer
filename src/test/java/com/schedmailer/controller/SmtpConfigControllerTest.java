@@ -1,7 +1,7 @@
 package com.schedmailer.controller;
 
-import com.schedmailer.dto.smtpconfig.SmtpConfigCreateDto;
-import com.schedmailer.dto.smtpconfig.SmtpConfigDto;
+import com.schedmailer.dto.smtpconfig.SmtpConfigRequestDto;
+import com.schedmailer.dto.smtpconfig.SmtpConfigResponseDto;
 import com.schedmailer.service.SmtpConfigService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,47 +29,47 @@ public class SmtpConfigControllerTest {
 
     @InjectMocks private SmtpConfigController smtpConfigController;
 
-    private SmtpConfigCreateDto createDto;
-    private SmtpConfigDto resultDto;
+    private SmtpConfigRequestDto requestDto;
+    private SmtpConfigResponseDto responseDto;
     private UriComponentsBuilder uriBuilder;
     private UUID configId;
 
     @BeforeEach
     void setUp() {
         configId = UUID.randomUUID();
-        createDto = SmtpConfigCreateDto.builder().build();
-        resultDto = new SmtpConfigDto();
-        resultDto.setId(configId);
+        requestDto = SmtpConfigRequestDto.builder().build();
+        responseDto = new SmtpConfigResponseDto();
+        responseDto.setId(configId);
         uriBuilder = UriComponentsBuilder.newInstance().path("/api");
     }
 
     @Test
     void createSmtpConfig_WithValidInput_ReturnsCreatedStatus() {
         // Arrange
-        when(smtpConfigService.createSmtpConfig(any(SmtpConfigCreateDto.class)))
-                .thenReturn(resultDto);
+        when(smtpConfigService.createSmtpConfig(any(SmtpConfigRequestDto.class)))
+                .thenReturn(responseDto);
 
         // Act
-        ResponseEntity<SmtpConfigDto> response =
-                smtpConfigController.createSmtpConfig(createDto, uriBuilder);
+        ResponseEntity<SmtpConfigResponseDto> response =
+                smtpConfigController.createSmtpConfig(requestDto, uriBuilder);
 
         // Assert
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        verify(smtpConfigService).createSmtpConfig(createDto);
+        verify(smtpConfigService).createSmtpConfig(requestDto);
     }
 
     @Test
     void createSmtpConfig_WithValidInput_GeneratesCorrectLocationHeader() {
         // Arrange
-        when(smtpConfigService.createSmtpConfig(any(SmtpConfigCreateDto.class)))
-                .thenReturn(resultDto);
+        when(smtpConfigService.createSmtpConfig(any(SmtpConfigRequestDto.class)))
+                .thenReturn(responseDto);
         URI expectedUri =
                 URI.create("/api" + SMTP_CONFIG_BY_ID.replace("{id}", configId.toString()));
 
         // Act
-        ResponseEntity<SmtpConfigDto> response =
-                smtpConfigController.createSmtpConfig(createDto, uriBuilder);
+        ResponseEntity<SmtpConfigResponseDto> response =
+                smtpConfigController.createSmtpConfig(requestDto, uriBuilder);
 
         // Assert
         assertEquals(expectedUri, response.getHeaders().getLocation());
