@@ -1,14 +1,15 @@
 package com.schedmailer.service;
 
-import com.schedmailer.dto.smtpconfig.SmtpConfigResponseDto;
 import com.schedmailer.dto.smtpconfig.SmtpConfigRequestDto;
+import com.schedmailer.dto.smtpconfig.SmtpConfigResponseDto;
 import com.schedmailer.entity.SmtpConfig;
 import com.schedmailer.exception.ResourceNotFoundException;
 import com.schedmailer.mapper.SmtpConfigMapper;
 import com.schedmailer.repository.SmtpConfigRepository;
 import com.schedmailer.util.EncryptionUtil;
-import com.schedmailer.util.UuidUtil;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -56,15 +57,13 @@ public class SmtpConfigService {
     }
 
     public SmtpConfigResponseDto getSmtpConfigById(String id) {
-        UUID uuid = UuidUtil.parseUuid(id);
-        SmtpConfig smtpConfig = getSmtpConfigFromDbById(uuid);
+        SmtpConfig smtpConfig = getSmtpConfigFromDbById(id);
         return smtpConfigMapper.smtpConfigToSmtpConfigResponseDto(smtpConfig);
     }
 
     public SmtpConfigResponseDto updateSmtpConfig(
             String id, SmtpConfigRequestDto smtpConfigRequestDto) {
-        UUID uuid = UuidUtil.parseUuid(id);
-        SmtpConfig existingSmtpConfig = getSmtpConfigFromDbById(uuid);
+        SmtpConfig existingSmtpConfig = getSmtpConfigFromDbById(id);
 
         existingSmtpConfig.setHost(smtpConfigRequestDto.host());
         existingSmtpConfig.setPort(Integer.parseInt(smtpConfigRequestDto.port()));
@@ -87,16 +86,13 @@ public class SmtpConfigService {
     }
 
     public void deleteSmtpConfig(String id) {
-        UUID uuid = UuidUtil.parseUuid(id);
-        if (!smtpConfigRepository.existsById(uuid)) {
-            throw new ResourceNotFoundException("SMTP Configuration not found with id: " + id);
-        }
-        smtpConfigRepository.deleteById(uuid);
+        getSmtpConfigFromDbById(id);
+        smtpConfigRepository.deleteById(UUID.fromString(id));
     }
 
-    private SmtpConfig getSmtpConfigFromDbById(UUID id) {
+    private SmtpConfig getSmtpConfigFromDbById(String id) {
         return smtpConfigRepository
-                .findById(id)
+                .findById(UUID.fromString(id))
                 .orElseThrow(
                         () ->
                                 new ResourceNotFoundException(

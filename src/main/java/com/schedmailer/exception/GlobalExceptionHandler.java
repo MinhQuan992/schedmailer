@@ -13,12 +13,6 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({InvalidUuidFormatException.class})
-    public ResponseEntity<Object> badRequestException(Exception exception) {
-        return buildErrorResponse(exception.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Object> notFoundException(Exception exception) {
