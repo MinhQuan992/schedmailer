@@ -1,6 +1,6 @@
 package com.schedmailer.controller;
 
-import static com.schedmailer.common.constants.EndpointConfig.SMTP_CONFIG_BY_ID;
+import static com.schedmailer.config.EndpointConfig.SMTP_CONFIG_BY_ID;
 
 import com.schedmailer.api.SmtpConfigApi;
 import com.schedmailer.dto.smtpconfig.SmtpConfigRequestDto;

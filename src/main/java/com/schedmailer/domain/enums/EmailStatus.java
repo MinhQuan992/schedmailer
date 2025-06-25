@@ -1,4 +1,4 @@
-package com.schedmailer.common.enums;
+package com.schedmailer.domain.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

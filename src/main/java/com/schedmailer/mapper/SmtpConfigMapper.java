@@ -1,7 +1,7 @@
 package com.schedmailer.mapper;
 
 import com.schedmailer.dto.smtpconfig.SmtpConfigResponseDto;
-import com.schedmailer.entity.SmtpConfig;
+import com.schedmailer.domain.entity.SmtpConfig;
 
 import org.mapstruct.Mapper;
 
