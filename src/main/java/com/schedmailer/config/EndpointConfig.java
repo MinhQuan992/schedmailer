@@ -1,4 +1,4 @@
-package com.schedmailer.common.constants;
+package com.schedmailer.config;
 
 public class EndpointConfig {
     private EndpointConfig() {}

@@ -1,8 +1,8 @@
 package com.schedmailer.api;
 
-import static com.schedmailer.common.constants.EndpointConfig.BY_ID;
-import static com.schedmailer.common.constants.EndpointConfig.ENDPOINT_V1;
-import static com.schedmailer.common.constants.EndpointConfig.SMTP_CONFIG;
+import static com.schedmailer.config.EndpointConfig.BY_ID;
+import static com.schedmailer.config.EndpointConfig.ENDPOINT_V1;
+import static com.schedmailer.config.EndpointConfig.SMTP_CONFIG;
 
 import com.schedmailer.dto.smtpconfig.SmtpConfigRequestDto;
 import com.schedmailer.dto.smtpconfig.SmtpConfigResponseDto;
@@ -100,10 +100,6 @@ public interface SmtpConfigApi {
                                                         implementation =
                                                                 SmtpConfigResponseDto.class))),
                 @ApiResponse(
-                        responseCode = "400",
-                        description = "Invalid UUID format provided",
-                        content = @Content),
-                @ApiResponse(
                         responseCode = "404",
                         description = "SMTP configuration not found",
                         content = @Content)
@@ -128,8 +124,7 @@ public interface SmtpConfigApi {
                                                                 SmtpConfigResponseDto.class))),
                 @ApiResponse(
                         responseCode = "400",
-                        description =
-                                "Invalid request (invalid UUID format or invalid configuration data)",
+                        description = "Invalid configuration data provided",
                         content = @Content),
                 @ApiResponse(
                         responseCode = "404",
@@ -160,10 +155,6 @@ public interface SmtpConfigApi {
                 @ApiResponse(
                         responseCode = "204",
                         description = "SMTP configuration deleted successfully",
-                        content = @Content),
-                @ApiResponse(
-                        responseCode = "400",
-                        description = "Invalid UUID format provided",
                         content = @Content),
                 @ApiResponse(
                         responseCode = "404",

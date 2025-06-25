@@ -1,6 +1,6 @@
 package com.schedmailer.repository;
 
-import com.schedmailer.entity.SmtpConfig;
+import com.schedmailer.domain.entity.SmtpConfig;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -2,7 +2,7 @@ package com.schedmailer.service;
 
 import com.schedmailer.dto.smtpconfig.SmtpConfigRequestDto;
 import com.schedmailer.dto.smtpconfig.SmtpConfigResponseDto;
-import com.schedmailer.entity.SmtpConfig;
+import com.schedmailer.domain.entity.SmtpConfig;
 import com.schedmailer.exception.ResourceNotFoundException;
 import com.schedmailer.mapper.SmtpConfigMapper;
 import com.schedmailer.repository.SmtpConfigRepository;

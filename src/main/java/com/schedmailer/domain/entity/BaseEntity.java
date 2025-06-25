@@ -1,4 +1,4 @@
-package com.schedmailer.entity;
+package com.schedmailer.domain.entity;
 
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
