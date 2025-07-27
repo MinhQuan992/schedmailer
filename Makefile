@@ -12,3 +12,12 @@ db-rollback:
     	  exit 1; \
     fi
 	mvn clean install liquibase:rollback -DskipTests=true -Dliquibase.rollbackCount=$(count)
+
+db-migrate:
+	@if [ -z "$(version)" ]; then \
+		echo "Migrating to latest version..."; \
+		mvn clean install liquibase:update -DskipTests=true; \
+	else \
+		echo "Migrating to version: $(version)"; \
+		mvn clean install liquibase:update -DskipTests=true -Dliquibase.toTag=$(version); \
+	fi
