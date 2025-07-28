@@ -1,0 +1,76 @@
+databaseChangeLog:
+- changeSet:
+    id: 1753116816739-1
+    author: quanvo (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: scheduled_emailsPK
+            name: id
+            type: UUID
+        - column:
+            name: created_at
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            name: updated_at
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: body
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: retry_count
+            type: INTEGER
+        - column:
+            name: sent_at
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            name: should_send_at
+            type: TIMESTAMP(6) WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: status
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: subject
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: to_email
+            type: VARCHAR(255)
+        - column:
+            name: smtp_config_id
+            type: UUID
+        tableName: scheduled_emails
+    rollback:
+    - dropTable:
+        tableName: scheduled_emails
+- changeSet:
+    id: 1753116816739-2
+    author: quanvo (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: smtp_config_id
+        baseTableName: scheduled_emails
+        constraintName: FKilnjc7ko1oy5dxyikhoeqygv2
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: smtp_configs
+        validate: true
+    rollback:
+    - dropForeignKeyConstraint:
+        baseTableName: scheduled_emails
+        constraintName: FKilnjc7ko1oy5dxyikhoeqygv2
+

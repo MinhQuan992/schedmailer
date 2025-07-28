@@ -1,5 +1,6 @@
 package com.schedmailer.controller;
 
+import static com.schedmailer.config.EndpointConfig.ENDPOINT_V1;
 import static com.schedmailer.config.EndpointConfig.SMTP_CONFIG_BY_ID;
 
 import com.schedmailer.api.SmtpConfigApi;
@@ -27,7 +28,9 @@ public class SmtpConfigController implements SmtpConfigApi {
         SmtpConfigResponseDto newSmtpConfig =
                 smtpConfigService.createSmtpConfig(smtpConfigRequestDto);
         URI newSmtpConfigId =
-                ucb.path(SMTP_CONFIG_BY_ID).buildAndExpand(newSmtpConfig.getId()).toUri();
+                ucb.path(ENDPOINT_V1 + SMTP_CONFIG_BY_ID)
+                        .buildAndExpand(newSmtpConfig.getId())
+                        .toUri();
         return ResponseEntity.created(newSmtpConfigId).build();
     }
 
