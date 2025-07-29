@@ -2,9 +2,9 @@ spring:
     application:
         name: schedmailer
     datasource:
-        url: jdbc:postgresql://${DB_ADDRESS:localhost}:${DB_PORT:5432}/${DB_DATABASE:schedmailer}
-        username: ${DB_USERNAME:postgres}
-        password: ${DB_PASSWORD:postgres}
+        url: ${DATA_SOURCE_URL:jdbc:postgresql://localhost:5432/schedmailer}
+        username: ${DATA_SOURCE_USERNAME:postgres}
+        password: ${DATA_SOURCE_PASSWORD:postgres}
         driver-class-name: org.postgresql.Driver
     jpa:
         hibernate:

@@ -1,0 +1,27 @@
+services:
+    api:
+        build: .
+        container_name: schedmailer-api
+        ports:
+            - "8080:8080"
+        environment:
+            DATA_SOURCE_URL: jdbc:postgresql://postgres:5432/schedmailer
+            DATA_SOURCE_USERNAME: ${DATA_SOURCE_USERNAME}
+            DATA_SOURCE_PASSWORD: ${DATA_SOURCE_PASSWORD}
+            ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+        depends_on:
+            - postgres
+    postgres:
+        image: postgres:15
+        container_name: postgres
+        restart: always
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_DB: schedmailer
+            POSTGRES_USER: ${DATA_SOURCE_USERNAME}
+            POSTGRES_PASSWORD: ${DATA_SOURCE_PASSWORD}
+        volumes:
+            - schedmailer-db:/var/lib/postgresql/data
+volumes:
+    schedmailer-db:
